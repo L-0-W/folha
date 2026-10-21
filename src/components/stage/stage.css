@@ -1,0 +1,353 @@
+.plate-hero {
+  color: var(--ink);
+}
+
+.mast,
+.writing-hero,
+.missing {
+  --accent: var(--oxblood);
+}
+
+.mast.plate-hero,
+.mast .plate-copy {
+  min-height: 0;
+}
+
+.mast .poster-slot {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 17.5rem;
+}
+
+.mast .plate-copy {
+  width: auto;
+  margin-left: 0;
+}
+
+.mast.plate-hero::after {
+  background: linear-gradient(180deg, transparent 0 34%, var(--sheet) 56%);
+}
+
+.mast-kicker {
+  order: 1;
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.mast .stickers {
+  order: 3;
+  margin-top: 0.85rem;
+}
+
+.mast .bio {
+  order: 4;
+}
+
+.mast .plate-foot {
+  order: 2;
+  margin-top: 0.35rem;
+}
+
+.mast-trade {
+  max-width: 16rem;
+  margin: 0 0 0.15rem;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.mast-seal {
+  position: absolute;
+  z-index: 2;
+  left: 8%;
+  bottom: 20%;
+  transform: rotate(-3deg);
+}
+
+.folio-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+.folio-plate {
+  order: -1;
+  min-width: 0;
+  scroll-margin-top: 1rem;
+}
+
+.folio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 0.4rem;
+  margin: 0;
+  padding: 0.4rem 0.12rem 0.15rem;
+  list-style: none;
+}
+
+.folio-grid > li {
+  min-width: 0;
+}
+
+.folio-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 1.5px solid rgba(28, 22, 18, 0.34);
+  border-radius: 10px 8px 12px 7px / 8px 12px 7px 10px;
+  background: var(--sheet);
+  color: var(--ink);
+  box-shadow: none;
+  transition:
+    transform 180ms var(--ease),
+    box-shadow 180ms var(--ease),
+    border-color 180ms var(--ease);
+}
+
+.folio-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.15rem;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #efe4d2;
+  padding-bottom: 1.15rem;
+  transition: filter 180ms var(--ease);
+}
+
+.folio-card:not([aria-pressed="true"]) .folio-face {
+  filter: grayscale(1) brightness(0.78) contrast(0.92);
+}
+
+.folio-card:not([aria-pressed="true"]):hover .folio-face {
+  filter: grayscale(0.35) brightness(0.92);
+}
+
+.folio-day {
+  font-family: var(--display);
+  font-size: clamp(1.7rem, 6vw, 2.4rem);
+  font-weight: 620;
+  font-variation-settings: "SOFT" 20, "opsz" 72, "WONK" 1, "wght" 620;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+}
+
+.folio-month {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.folio-volume {
+  width: 46%;
+  height: 42%;
+  border: 1.5px solid var(--ink);
+  border-radius: 2px 8px 8px 2px;
+  background: linear-gradient(
+    90deg,
+    var(--ink) 0 14%,
+    var(--sheet) 14% 74%,
+    var(--accent, var(--oxblood)) 74%
+  );
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-8deg);
+}
+
+.folio-name {
+  position: absolute;
+  right: 0.18rem;
+  bottom: 0.22rem;
+  left: 0.18rem;
+  z-index: 1;
+  overflow: hidden;
+  padding: 0.05rem 0.15rem 0.08rem;
+  border-radius: 0.25rem;
+  background: var(--sheet);
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.folio-card[aria-pressed="true"] {
+  z-index: 3;
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2.5deg);
+}
+
+.folio-card[aria-pressed="true"] .folio-name {
+  color: var(--ink);
+}
+
+.folio-card[aria-pressed="true"]:hover {
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: rotate(-2.5deg) translate(-1px, -1px);
+}
+
+.folio-card:active {
+  transform: translate(1px, 1px);
+}
+
+.folio-card[aria-pressed="true"]:active {
+  transform: rotate(-2.5deg) translate(1px, 1px);
+}
+
+.folio-hero .plate-name {
+  font-size: clamp(1.85rem, 7.4cqi, 3.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  overflow-wrap: break-word;
+}
+
+.folio-note {
+  max-width: 16rem;
+  margin: 0 0 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: right;
+  text-wrap: pretty;
+}
+
+.missing .plate-hero {
+  margin-top: 0.35rem;
+}
+
+@media (min-width: 640px) and (max-width: 899px) {
+  .folio-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 720px) {
+  .mast.plate-hero,
+  .mast .plate-copy {
+    min-height: 34rem;
+  }
+
+  .mast .poster-slot {
+    position: absolute;
+    left: -6%;
+    bottom: -4%;
+    width: 52%;
+    height: 108%;
+  }
+
+  .mast .plate-copy {
+    width: min(34rem, 58%);
+    margin-left: auto;
+  }
+
+  .mast .mast-kicker,
+  .mast .stickers,
+  .mast .bio,
+  .mast .plate-foot {
+    order: 0;
+  }
+
+  .mast .stickers {
+    margin-top: 0.85rem;
+  }
+
+  .mast .plate-foot {
+    margin-top: auto;
+  }
+
+  .mast.plate-hero::after {
+    background: linear-gradient(
+      100deg,
+      transparent 0 34%,
+      color-mix(in srgb, var(--sheet) 72%, transparent) 52%,
+      var(--sheet) 68%
+    );
+  }
+
+  .mast-seal {
+    left: 8%;
+    bottom: 26%;
+  }
+}
+
+@media (min-width: 900px) {
+  .folio-spread {
+    display: grid;
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+    align-items: start;
+    column-gap: 0.85rem;
+  }
+
+  .folio-plate {
+    order: 0;
+  }
+
+  .folio-grid {
+    position: relative;
+    z-index: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    padding-top: 0.85rem;
+  }
+
+  .folio-name {
+    font-size: 0.64rem;
+  }
+
+  .folio-hero.is-bleed .poster-slot {
+    left: -14%;
+    bottom: -2%;
+    width: 78%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .folio-name {
+    font-size: 0.52rem;
+    letter-spacing: 0.02em;
+  }
+
+  .mast .poster-slot {
+    height: 15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-card,
+  .folio-face {
+    transition: none;
+  }
+
+  .folio-card:not([aria-pressed="true"]):hover,
+  .folio-card:not([aria-pressed="true"]):active {
+    transform: none;
+  }
+
+  .mast-seal {
+    transform: rotate(-3deg);
+  }
+}

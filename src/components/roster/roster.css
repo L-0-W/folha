@@ -1,0 +1,472 @@
+.roster-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+.roster-plate {
+  order: -1;
+  min-width: 0;
+  scroll-margin-top: 1rem;
+}
+
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem 0.4rem;
+  margin: 0;
+  padding: 0.35rem 0.05rem 0.15rem;
+  list-style: none;
+}
+
+.roster-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 1.5px solid rgba(28, 22, 18, 0.34);
+  border-radius: 10px 8px 12px 7px / 8px 12px 7px 10px;
+  background: var(--sheet);
+  color: var(--ink);
+  box-shadow: none;
+  transition:
+    transform 180ms var(--ease),
+    box-shadow 180ms var(--ease),
+    border-color 180ms var(--ease);
+}
+
+.roster-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: inherit;
+  background-color: #efe4d2;
+  padding-bottom: 1rem;
+  transition: filter 180ms var(--ease);
+}
+
+.roster-card:not([aria-pressed="true"]):not(.is-closed) .roster-face {
+  filter: grayscale(1) brightness(0.78) contrast(0.92);
+}
+
+.roster-card:not([aria-pressed="true"]):not(.is-closed):hover .roster-face {
+  filter: grayscale(0.35) brightness(0.92);
+}
+
+.roster-card .glyph {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.roster-name {
+  position: absolute;
+  right: 0.18rem;
+  bottom: 0.22rem;
+  left: 0.18rem;
+  z-index: 1;
+  overflow: hidden;
+  padding: 0.05rem 0.15rem 0.08rem;
+  border-radius: 0.25rem;
+  background: var(--sheet);
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.roster-card[aria-pressed="true"] {
+  z-index: 3;
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2.5deg);
+}
+
+.roster-card[aria-pressed="true"] .roster-name {
+  color: var(--ink);
+}
+
+.roster-card[aria-pressed="true"]:hover {
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: rotate(-2.5deg) translate(-1px, -1px);
+}
+
+.roster-card:active {
+  transform: translate(1px, 1px);
+}
+
+.roster-card[aria-pressed="true"]:active {
+  transform: rotate(-2.5deg) translate(1px, 1px);
+}
+
+.roster-ribbon {
+  position: absolute;
+  top: 0.28rem;
+  left: 50%;
+  z-index: 2;
+  translate: -50% 0;
+  padding: 0.1rem 0.32rem 0.08rem;
+  background: var(--oxblood);
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--sheet);
+  font-family: var(--sans);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.roster-card.is-closed {
+  cursor: not-allowed;
+}
+
+.roster-card.is-closed .roster-face {
+  background-color: #e6dccb;
+  background-image: radial-gradient(rgba(28, 22, 18, 0.28) 1.15px, transparent 1.5px);
+  background-size: 7px 7px;
+  color: var(--ink-soft);
+  filter: grayscale(1) brightness(0.9);
+}
+
+.roster-mystery {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 560;
+  font-variation-settings: "SOFT" 20, "opsz" 72, "WONK" 1, "wght" 560;
+  line-height: 1;
+}
+
+.roster-lock {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.plate-hero {
+  position: relative;
+  container: plate / inline-size;
+  min-height: 23rem;
+  overflow: visible;
+  border: 2px solid var(--ink);
+  border-radius: 16px 12px 18px 11px / 12px 18px 11px 16px;
+  background: var(--sheet);
+  box-shadow: 6px 6px 0 rgba(28, 22, 18, 0.9);
+  animation: rise 280ms var(--ease) both;
+}
+
+.plate-hero::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: 1;
+  border: 1px solid rgba(28, 22, 18, 0.55);
+  border-radius: 11px 8px 13px 7px / 8px 13px 7px 11px;
+  pointer-events: none;
+}
+
+.plate-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    100deg,
+    transparent 0 34%,
+    color-mix(in srgb, var(--sheet) 78%, transparent) 58%,
+    var(--sheet) 80%
+  );
+  pointer-events: none;
+}
+
+.poster-slot {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  bottom: 0;
+  width: 72%;
+  height: 94%;
+  pointer-events: none;
+}
+
+.poster-slot .poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.plate-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 23rem;
+  padding: 1.05rem 1rem 1rem;
+}
+
+.stickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.7rem;
+  align-self: flex-start;
+  max-width: 16rem;
+  margin: 0.15rem 0 0;
+  padding: 0.2rem 0 0;
+  list-style: none;
+}
+
+.stickers li {
+  padding: 0.28rem 0.48rem 0.22rem;
+  border-radius: 2px;
+  background: var(--oxblood);
+  box-shadow: 3px 3px 0 var(--ink);
+  color: var(--sheet);
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.stickers li:nth-child(1) {
+  transform: rotate(-7deg);
+}
+
+.stickers li:nth-child(2) {
+  transform: rotate(4deg);
+  margin-top: 0.35rem;
+}
+
+.stickers li:nth-child(3) {
+  transform: rotate(-2.5deg);
+}
+
+.plate-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: auto;
+  text-align: right;
+}
+
+.plate-lead {
+  max-width: 16rem;
+  margin: 0 0 0.35rem;
+  padding: 0.08rem 0.28rem 0.12rem;
+  background: var(--sheet);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  font-style: italic;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.plate-name {
+  margin: 0;
+  max-width: 100%;
+  padding: 0 0.06em 0.04em;
+  background: var(--sheet);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: clamp(2.7rem, 18cqi, 7.6rem);
+  font-weight: 620;
+  font-variation-settings: "SOFT" 30, "opsz" 144, "WONK" 1, "wght" 620;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  text-wrap: balance;
+}
+
+.plate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0.85rem;
+}
+
+.marks {
+  display: flex;
+  gap: 0.38rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: var(--oxblood);
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--sheet);
+}
+
+.mark svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.chamfer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-height: 2.75rem;
+  padding: 0.45rem 1.55rem 0.4rem;
+  background: var(--oxblood);
+  color: var(--sheet);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  clip-path: polygon(
+    0.8rem 0,
+    calc(100% - 0.8rem) 0,
+    100% 50%,
+    calc(100% - 0.8rem) 100%,
+    0.8rem 100%,
+    0 50%
+  );
+  filter: drop-shadow(3px 3px 0 var(--ink));
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    filter 160ms ease,
+    transform 160ms var(--ease);
+}
+
+.chamfer:hover {
+  background: var(--ink);
+  color: var(--sheet);
+}
+
+.chamfer:active {
+  filter: drop-shadow(1px 1px 0 var(--ink));
+  transform: translate(1px, 1px);
+}
+
+.plate-url {
+  margin: 0.55rem 0 0;
+  padding: 0 0.15rem 0.05rem;
+  border-bottom: 1.5px dashed var(--accent);
+  background: var(--sheet);
+  color: var(--accent);
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.project-sheet .plate-hero {
+  margin-top: 1.15rem;
+}
+
+@media (min-width: 900px) {
+  .roster-spread {
+    display: grid;
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+    align-items: start;
+    column-gap: 0.85rem;
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .roster-plate {
+    order: 0;
+  }
+
+  .roster-grid {
+    position: relative;
+    z-index: 2;
+    align-content: start;
+    padding-top: 0.85rem;
+  }
+
+  .roster-plate {
+    position: relative;
+    z-index: 1;
+  }
+
+  .roster-card .glyph {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .roster-name {
+    font-size: 0.64rem;
+  }
+
+  .plate-hero,
+  .plate-copy {
+    min-height: 24rem;
+  }
+
+  .project-sheet .plate-hero,
+  .project-sheet .plate-copy {
+    min-height: 24rem;
+  }
+
+  .plate-hero.is-bleed .poster-slot {
+    left: -14%;
+    bottom: -2%;
+    width: 78%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .roster-grid {
+    gap: 0.4rem 0.28rem;
+  }
+
+  .roster-name {
+    font-size: 0.52rem;
+    letter-spacing: 0.04em;
+  }
+
+  .roster-card .glyph {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .mark {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+
+  .plate-copy {
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate-hero {
+    animation: none;
+  }
+
+  .roster-card,
+  .roster-face,
+  .chamfer {
+    transition: none;
+  }
+}
